@@ -208,7 +208,7 @@ class SwUploader:
         self._sent_msg = await self._sent_msg.reply_media(
             document=self._up_path,
             message=description,
-            description=file,
+            description='lovetoride',
             mime_type=mime_type,
             thumb=thumb,
             progress=self._upload_progress,
