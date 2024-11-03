@@ -192,6 +192,8 @@ class SwUploader:
 
         if not is_image and thumb is None:
             file_name = ospath.splitext(file)[0]
+            file_name = ospath.splitext(file)[0]
+            file_name= ' '.join(file_name.split()[2:])
             thumb_path = f"{self._path}/yt-dlp-thumb/{file_name}.jpg"
             if await aiopath.isfile(thumb_path):
                 thumb = thumb_path
@@ -208,7 +210,7 @@ class SwUploader:
         self._sent_msg = await self._sent_msg.reply_media(
             document=self._up_path,
             message=description,
-            description='lovetoride',
+            description=file_name,
             mime_type=mime_type,
             thumb=thumb,
             progress=self._upload_progress,
