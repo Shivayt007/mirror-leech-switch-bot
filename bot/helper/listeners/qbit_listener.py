@@ -122,6 +122,13 @@ async def _qb_listener():
                     tag = tor_info.tags
                     if tag not in QbTorrents:
                         continue
+                    
+                    # Check if the torrent file size exceeds 8 GB
+                    if tor_info.total_size > 8 * 1024**3:
+                        _onDownloadError("Torrent file size exceeds 8 GB. Download canceled.", tor_info)
+                        await sync_to_async(qbittorrent_client.torrents_delete, torrent_hashes=tor_info.hash)
+                        continue
+
                     state = tor_info.state
                     if state == "metaDL":
                         TORRENT_TIMEOUT = config_dict["TORRENT_TIMEOUT"]
@@ -196,6 +203,7 @@ async def _qb_listener():
             except Exception as e:
                 LOGGER.error(str(e))
         await sleep(3)
+        
 
 
 async def onDownloadStart(tag):
