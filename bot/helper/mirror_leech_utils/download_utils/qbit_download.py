@@ -71,10 +71,6 @@ async def add_qb_torrent(listener, path, ratio, seed_time):
             tor_info = tor_info[0]
 
             # Check if the torrent size exceeds 8 GB (8 * 1024^3 bytes)
-            if tor_info.total_size > 8 * 1024**3:
-                await listener.onDownloadError("Torrent file size exceeds 8 GB. Download canceled.")
-                await sync_to_async(qbittorrent_client.torrents_delete, torrent_hashes=tor_info.hash)
-                return
 
             listener.name = tor_info.name
             ext_hash = tor_info.hash
