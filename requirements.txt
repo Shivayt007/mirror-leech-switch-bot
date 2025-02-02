@@ -26,7 +26,7 @@ python-dotenv
 python-magic
 qbittorrent-api
 requests
-swibots
+swibots==1.4.67
 telegraph
 tenacity
 tgcrypto
